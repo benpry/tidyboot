@@ -156,7 +156,7 @@ tidyboot.data.frame <- function(data,
   samples <- data %>%
     modelr::bootstrap(n = nboot) %>%
     dplyr::mutate(strap = purrr::map(strap, dplyr::as_tibble)) %>%
-    tidyr::unnest(cols = strap)
+    tidyr::unnest(cols = c(strap))
 
   if (!rlang::is_null(data_groups)) {
     samples <- samples %>% dplyr::group_by(.id, !!!data_groups)
